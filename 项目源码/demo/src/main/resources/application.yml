@@ -1,0 +1,74 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+spring:
+  application:
+    name: tourism-management
+  datasource:
+    url: jdbc:mysql://localhost:3306/finance?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456789xmb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  mapper-locations: classpath:mapper/*.xml
+
+knife4j:
+  enable: true
+  setting:
+    language: zh-CN
+    swagger-model-name: 实体类列表
+  basic:
+    enable: false
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  packages-to-scan: com.example.demo.controller
+  paths-to-match: /api/**
+
+file:
+  upload:
+    path: ${user.home}/uploads
+  access:
+    path: /uploads
+
+logging:
+  level:
+    com.example.demo: debug
+    org.springframework.security: debug
+
+jwt:
+  secret: 8Zz5tw0Ionm3XPZZfN0NOml3z9FMfmpgXwovR9fp6ryDIoGRM8EPHAB6iHsc0fb
+  expiration: 86400000  # 24小时，单位：毫秒
+
+app:
+  upload:
+    dir: ${file.upload.path}/avatars
+    url-prefix: ${file.access.path}/avatars
